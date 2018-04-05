@@ -10,4 +10,5 @@
     <string name="emojify_me">Emojify Me</string>
     <string name="error">File not deleted!</string>
     <string name="saved_message">Image saved successfully</string>
+    <string name="permission_denied">Storage permission denied!</string>
 </resources>
