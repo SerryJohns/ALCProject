@@ -24,6 +24,11 @@ import com.serionz.alcproject.R;
 import java.io.File;
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import timber.log.Timber;
+
 public class EmojifyMainActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -31,14 +36,14 @@ public class EmojifyMainActivity extends AppCompatActivity {
 
     private static final String FILE_PROVIDER_AUTHORITY = "com.serionz.alcproject.fileprovider";
 
-    private ImageView mImageView;
+    @BindView(R.id.image_view) ImageView mImageView;
 
-    private Button mEmojifyButton;
-    private FloatingActionButton mSaveFab;
-    private FloatingActionButton mShareFab;
-    private FloatingActionButton mClearFab;
+    @BindView(R.id.emojify_button) Button mEmojifyButton;
+    @BindView(R.id.save_button) FloatingActionButton mSaveFab;
+    @BindView(R.id.share_button) FloatingActionButton mShareFab;
+    @BindView(R.id.clear_button) FloatingActionButton mClearFab;
 
-    private TextView mTitleTextView;
+    @BindView(R.id.title_text_view) TextView mTitleTextView;
 
     private String mTempPhotoPath;
     private Bitmap mResultsBitmap;
@@ -48,16 +53,14 @@ public class EmojifyMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emojify_main);
 
-        // Bind the views
-        mImageView = (ImageView) findViewById(R.id.image_view);
-        mEmojifyButton = (Button) findViewById(R.id.emojify_button);
-        mSaveFab = (FloatingActionButton) findViewById(R.id.save_button);
-        mShareFab = (FloatingActionButton) findViewById(R.id.share_button);
-        mClearFab = (FloatingActionButton) findViewById(R.id.clear_button);
-        mTitleTextView = (TextView) findViewById(R.id.title_text_view);
+        // Bind Views
+        ButterKnife.bind(this);
 
+        // Set up Timber
+        Timber.plant(new Timber.DebugTree());
     }
 
+    @OnClick(R.id.emojify_button)
     public void emojifyMe(View view) {
         // Check for the external storage permission
         if (ContextCompat.checkSelfPermission(this,
@@ -142,17 +145,20 @@ public class EmojifyMainActivity extends AppCompatActivity {
         mImageView.setImageBitmap(mResultsBitmap);
     }
 
+    @OnClick(R.id.save_button)
     public void saveMe(View view) {
         BitmapUtils.deleteImageFile(this, mTempPhotoPath);
         BitmapUtils.saveImage(this, mResultsBitmap);
     }
 
+    @OnClick(R.id.share_button)
     public void shareMe(View view) {
         BitmapUtils.deleteImageFile(this, mTempPhotoPath);
         BitmapUtils.saveImage(this, mResultsBitmap);
         BitmapUtils.shareImage(this, mTempPhotoPath);
     }
 
+    @OnClick(R.id.clear_button)
     public void clearImage(View view) {
         mImageView.setImageResource(0);
         mEmojifyButton.setVisibility(View.VISIBLE);

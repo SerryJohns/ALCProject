@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.util.Log;
 import android.util.SparseArray;
 import android.widget.Toast;
 
@@ -12,6 +11,8 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.serionz.alcproject.R;
+
+import timber.log.Timber;
 
 /**
  * Created by johnpaulseremba on 05/04/2018.
@@ -35,7 +36,7 @@ public class Emojifier {
 
         // Detect faces
         SparseArray<Face> faces = detector.detect(frame);
-        Log.d(TAG, "Detected faces: " + faces.size());
+        Timber.d("Detected faces: " + faces.size());
 
         Bitmap resultBitmap = picture;
 
