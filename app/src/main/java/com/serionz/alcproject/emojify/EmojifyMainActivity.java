@@ -137,7 +137,7 @@ public class EmojifyMainActivity extends AppCompatActivity {
         mResultsBitmap = BitmapUtils.resamplePic(this, mTempPhotoPath);
 
         // Detect Faces
-        Emojifier.detectFaces(this, mResultsBitmap);
+        mResultsBitmap = Emojifier.detectFacesAndOverlayEmoji(this, mResultsBitmap);
 
         mImageView.setImageBitmap(mResultsBitmap);
     }
