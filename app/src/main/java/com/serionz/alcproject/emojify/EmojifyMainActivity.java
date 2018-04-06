@@ -129,16 +129,20 @@ public class EmojifyMainActivity extends AppCompatActivity {
         // Toggle Visibility of Views
         mEmojifyButton.setVisibility(View.GONE);
         mTitleTextView.setVisibility(View.GONE);
-        mSaveFab.setVisibility(View.GONE);
-        mShareFab.setVisibility(View.GONE);
-        mClearFab.setVisibility(View.GONE);
+        mSaveFab.setVisibility(View.VISIBLE);
+        mShareFab.setVisibility(View.VISIBLE);
+        mClearFab.setVisibility(View.VISIBLE);
 
         // Resample the saved image to fit the ImageView
         mResultsBitmap = BitmapUtils.resamplePic(this, mTempPhotoPath);
+
+        // Detect Faces
+        Emojifier.detectFaces(this, mResultsBitmap);
+
         mImageView.setImageBitmap(mResultsBitmap);
     }
 
-    private void saveMe(View view) {
+    public void saveMe(View view) {
         BitmapUtils.deleteImageFile(this, mTempPhotoPath);
         BitmapUtils.saveImage(this, mResultsBitmap);
     }
