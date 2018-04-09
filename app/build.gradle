@@ -42,4 +42,10 @@ dependencies {
 
     implementation 'com.android.support:preference-v7:26.1.0'
 
+    // Firebase dependencies
+    implementation 'com.google.firebase:firebase-database:12.0.1'
+    implementation 'com.google.firebase:firebase-messaging:12.0.1'
+    implementation 'com.google.firebase:firebase-core:12.0.1'
 }
+
+apply plugin: 'com.google.gms.google-services'
